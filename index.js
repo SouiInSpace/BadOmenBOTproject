@@ -17,24 +17,30 @@ Client.on("message", message => {
     if(message.author.bot) return;
 
     if(message.content == prefix + "ACHAT"){
-        message.channel.send("Pour commander quelque chose chez nous suivez ce tuto :");
+        message.delete()
+        message.channel.send("`Pour commander quelque chose chez nous suivez ce tuto :`");
     }
     if(message.content == prefix + "MC"){
-        message.channel.send("Vous voulez installer un serveur minecraft suivez ce tuto : ");
+        message.delete()
+        message.channel.send("`Vous voulez installer un serveur minecraft suivez ce tuto :` ");
     }
     if(message.content == prefix + "WEB"){
-        message.channel.send("Vous cherchez une offre web ? vous cherchez comment l'installer **suivez ce tuto** :");
+        message.delete()
+        message.channel.send("`Vous cherchez une offre web ? vous cherchez comment l'installer **suivez ce tuto** :` ");
     }
     if(message.content == prefix + "HELP"){
-        message.channel.send("**Besoins d'aide pour utilisez le bot voici les commandes : ** ");
+        message.channel.send("`Besoins d'aide pour utilisez le bot voici les commandes : \n - BDachat pour un tuto pour apprendre à commander chez nous ! \n - BDMC Pour obtenir le tuto d'installation et d'achat d'un serveur Minecraft \n - BDWEB Pour un tuto sur l'achat et l'installation de site web ! \n - BDassistance pour une assistance personalise et recevoir des conseils.` ");
     }
     if(message.content == prefix){
-        message.channel.send("**Besoins d'aide pour utilisez le bot voici les commandes : ** ");
+        message.channel.send("`Besoins d'aide pour utilisez le bot voici les commandes : \n - BDachat pour un tuto pour apprendre à commander chez nous ! \n - BDMC Pour obtenir le tuto d'installation et d'achat d'un serveur Minecraft \n - BDWEB Pour un tuto sur l'achat et l'installation de site web ! \n - BDassistance pour une assistance personalise et recevoir des conseils.`");
     }
     if(message.content == "Bonjour bot"){
-        message.channel.send(" Hey comment vas-tu ? ^w^ ");
+        message.reply(" Hey comment vas-tu ? ^w^ ");
         message.react('❤');
     }
+if(message.content == "Bien et toi bot ?"){
+        message.channel.send(" Superrr ^w^ ");
+}
     if(message.content == "Comment vas-tu mon pote ?"){
         message.channel.send(" bien bien je surveille les serveurs de l'asso :D ");
     }
@@ -47,8 +53,8 @@ if(message.content == prefix + "assistance"){
     message.react('✅');
  } 
  if(message.content == prefix + "technique"){
-    message.reply("Quel service est concernées ? BDMinecraft / BDWeb / BDVPS ?");
-    message.react(':white_check_mark:');
+    message.reply("Quel service est concernés ? BDMinecraft / BDWeb / BDVPS ?");
+    message.react('✅');
  }
  //minecraft
  if(message.content == prefix + "Minecraft"){
@@ -91,12 +97,60 @@ if(message.content == prefix + "VPS"){
 }
 //BDRemboursement
 if(message.content == prefix + "Remboursement"){
-    message.reply("Avant de réclamer un remboursement merci de lire nos CGU/CGV disponible ici :")
+    message.channel.send("Avant de réclamer un remboursement merci de lire nos CGU/CGV disponible ici :")
     message.react('✅');
+}
+//BDdémarrage
+if(message.content == prefix + "démarrage"){
+    message.reply("Un problème avec le démarrage de votre serveur suivez ce tuto !")
+    message.react('✅');
+}
+//BDinstallation 
+if(message.content == prefix + "installation"){
+    message.reply("Pour installer un serveur suivez ce tuto :")
+    message.react('✅');
+}
+//BDintervention
+if(message.member.permissions.has("ADMINISTRATOR")){
+    if(message.content.startsWith(prefix + "TECH")){
+        message.delete()
+            console.log("Message masqués apr supréssion");
+            message.channel.send("@everyone un problème technique encore inconnu empêche les serveurs de fonctionner correctement nous vous recontactions très bientôt");
+        }
+    
+}
+
+
+if(message.member.permissions.has("MANAGE_MESSAGES")){
+    if(message.content.startsWith(prefix + "DELETOR")){
+        let args = message.content.split(" ");
+
+        if(args[1] == undefined){
+            message.reply("Nombre de message à supprimer non définis ou mal orthographier (un chiffre entre 1 et 100");
+        }
+        else {
+            let number = parseInt(args[1]);
+
+            if(isNaN(number)){
+                message.reply("Nombre de message à supprimer non définis ou mal orthographier (un chiffre entre 1 et 100)");
+            }
+            else{
+                message.channel.bulkDelete(number + 1).then(messages =>{
+                    console.log("les messages ont été supprimées");
+                    
+                }).catch(err =>{
+                    console.log("erreur de supprésion"+ err);
+                })
+            }
+        }
+    }
 }
 });
 
 
 
-Client.login("ODA1NzQ5MDY3ODE1NTgzNzg0.YBfaSw.rihlY5Ok8-9YMWy-pRiwGBYezrU");
+
+
+
+Client.login("-");
 
