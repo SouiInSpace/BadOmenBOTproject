@@ -28,9 +28,6 @@ Client.on("message", message => {
         message.delete()
         message.channel.send("`Vous cherchez une offre web ? vous cherchez comment l'installer **suivez ce tuto** :` ");
     }
-    if(message.content == prefix + "HELP"){
-        message.channel.send("`Besoins d'aide pour utilisez le bot voici les commandes : \n - BDachat pour un tuto pour apprendre à commander chez nous ! \n - BDMC Pour obtenir le tuto d'installation et d'achat d'un serveur Minecraft \n - BDWEB Pour un tuto sur l'achat et l'installation de site web ! \n - BDassistance pour une assistance personalise et recevoir des conseils.` ");
-    }
     if(message.content == prefix){
         message.channel.send("`Besoins d'aide pour utilisez le bot voici les commandes : \n - BDachat pour un tuto pour apprendre à commander chez nous ! \n - BDMC Pour obtenir le tuto d'installation et d'achat d'un serveur Minecraft \n - BDWEB Pour un tuto sur l'achat et l'installation de site web ! \n - BDassistance pour une assistance personalise et recevoir des conseils.`");
     }
@@ -44,9 +41,15 @@ if(message.content == "Bien et toi bot ?"){
     if(message.content == "Comment vas-tu mon pote ?"){
         message.channel.send(" bien bien je surveille les serveurs de l'asso :D ");
     }
-    if(message.content == "Dis bot contrôle maintenance"){
+    if(message.memeber.permissions.has("ADMINISTRATOR")){
+     if(message.content == "Dis bot contrôle maintenance"){
+         message.delete()
         message.channel.send("Très bien : - Serveur minecraft : 05/10 online -Serveur web: 00/00 - VPS : {const/100} - La temparture est normal tout fonctionne ");
-    }   
+    }  
+    else {
+        message.reply("Vous n'avez pas la permissions d'effectuer cette commande ")
+    }
+} 
 
 if(message.content == prefix + "assistance"){
     message.reply("que se passe t'il ? Sagit t'il d'un problème BDtechnique / BDRemboursement / BDautres .");
@@ -117,7 +120,64 @@ if(message.member.permissions.has("ADMINISTRATOR")){
             console.log("Message masqués apr supréssion");
             message.channel.send("@everyone un problème technique encore inconnu empêche les serveurs de fonctionner correctement nous vous recontactions très bientôt");
         }
+        else {
+            message.reply("Vous n'avez pas la permisssions d'éeffectuer cette commande")
+        }
     
+}
+//BDexpulsions
+if(message.member.permissions.has("ADMINISTRATOR")){
+    if(message.content.startsWith(prefix + "kick")){
+        console.log("Expulsion du client en cours");
+        message.delete()
+        const user = message.mention.user.first();
+        if (user){
+            const member = message.guild.member(user);
+            if (member){
+                member
+                .kick
+                .then(() => {
+                    message.reply(`Membre correctement expulser ${user.tag}`);
+                })
+            //Recupération de l'erreur pour verifier les perms de l'éxécuteur
+            .catch(err =>{
+                message.reply(`Vous n'avez pas la permissions d'expulser ${user.tag}`);
+                console.log("Erreur pas possible de kick" + err);
+            });        
+            }
+            else {
+                message.reply("Vous n'avez pas mentionnez d'utilsiateur");
+            }
+        }
+
+    }
+}
+
+//Commande de besoins d'aide 
+if(message.content == prefix + "HELP"){
+    message.delete()
+    const helpIm = new Discord.MessageEmbeb()
+    .setColor('#0099ff')
+    .setTitle("Centre d'assistance")
+    .setURL("https://discord.gg/eyazTXaz8v")
+    .setAuthor("Soui In Space", 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+    .setDescription("Le centre d'assistance vous permettera de trouver des tutos et un référencement de la totalité des commandes")
+    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
+    .addFields(
+        { name : "Voici un document text contenant la totalité des commandes", value: "Ajouter le lien"},
+        { name : "Un tuto général pour être guider sur le discord et sur le site de Bad Omen Telecom", value: "Ajouter le lien"}
+    )
+}
+
+// Commande pour tester la vitalité du bot
+if(message.member.permissions.has("ADMINISTRATOR")){
+    if(message.content.startsWith(prefix + "TEST")){
+        message.delete()
+        message.reply("Je suis vivant ne vous inquiétez pas ^^ ");
+    }
+    else {
+        message.reply("vous n'avez pas la permissions d'effectuer cette commande sorry :/")
+    }
 }
 
 
