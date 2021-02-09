@@ -42,7 +42,7 @@ if(message.content == "Bien et toi bot ?"){
         message.channel.send(" bien bien je surveille les serveurs de l'asso :D ");
     }
     if(message.memeber.permissions.has("ADMINISTRATOR")){
-     if(message.content == "Dis bot contrôle maintenance"){
+     if(message.content == "contrôle maintenance"){
          message.delete()
         message.channel.send("Très bien : - Serveur minecraft : 05/10 online -Serveur web: 00/00 - VPS : {const/100} - La temparture est normal tout fonctionne ");
     }  
@@ -121,10 +121,17 @@ if(message.member.permissions.has("ADMINISTRATOR")){
             message.channel.send("@everyone un problème technique encore inconnu empêche les serveurs de fonctionner correctement nous vous recontactions très bientôt");
         }
         else {
-            message.reply("Vous n'avez pas la permisssions d'éeffectuer cette commande")
+            message.reply("Vous n'avez pas la permisssions d'éeffectuer cette commande");
         }
     
 }
+//evaluation
+if(message.content.startsWith(prefix + "evaluation")){
+    message.delete()
+    message.reply("Pour evaluer l'offre la plus adapter réfléchissez au critère suivant, si vous avez des doutes demandez nous")
+    message.channel.send("Combien de joueurs/utilisateurs ? Combien de stockage ? Combien de bande passantes ? Combiend de mods ?")
+}
+
 //BDexpulsions
 if(message.member.permissions.has("ADMINISTRATOR")){
     if(message.content.startsWith(prefix + "kick")){
@@ -152,6 +159,31 @@ if(message.member.permissions.has("ADMINISTRATOR")){
 
     }
 }
+
+//réaction pour savoir qu'elle offre possède le client 
+if(message.content == prefix + "ROLESET"){
+    message.delete()
+    if(message.member.permissions("ADMINISTRATOR")){
+        message.reply("Réagissez à ce meqssage pour obtenir les rôles avec les émotes suivantes");
+        message.channel.send("VPS : ");
+        message.react('✅');
+        message.channel.send("Serveur minecraft :");
+        message.react('✅');
+        message.channel.send("Serveur web");
+        message.react('✅');
+        message.channel.send("je suis développeur :")
+        message.react('✅');
+        if(message.content.react == ""){
+            
+        }
+
+    }
+    else {
+        message.reply("Vous possédez déjà un rôle cela vous empêche d'effectuer la commande");
+    }
+}
+
+
 
 //Commande de besoins d'aide 
 if(message.content == prefix + "HELP"){
