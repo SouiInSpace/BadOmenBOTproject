@@ -212,6 +212,37 @@ if(message.member.permissions.has("ADMINISTRATOR")){
     }
 }
 
+//Commande site à finir
+if(message.memeber.permissions.has("MANAGE_MESSAGES")){
+    if(message.content.startsWith(prefix + "site")){
+        message.delete()
+        message.reply("Le site de l'association est : https://badomen-telecom.com/")
+        var x = setTimeout(message.delete(),100000);
+    }
+}
+//Commande de bannissement                              à vérifier :
+if(message.memeber.permissions.has("ADMINISTRATOR")){
+    if(message.content.startsWith(prefix + "ban")){
+            const user = message.mentions.first.user.first()
+            if(user){
+                const member = message.guild.member(user);
+                if(member){
+                    member.ban({
+                        reason: 'Non respect tu règlement cheh',
+                    }).then(() => {
+                        message.reply("L'utilisateur à été correctement bannis RIP $(user.tag)")
+                    }).catch(err => {
+                        console.error(err);
+                    });  
+                 }
+                else{
+                    message.reply("Vous n'avez pas la permissions d'éffectuer cette commande")
+                
+              }
+            
+         } 
+    }
+}
 
 if(message.member.permissions.has("MANAGE_MESSAGES")){
     if(message.content.startsWith(prefix + "DELETOR")){
@@ -245,4 +276,3 @@ if(message.member.permissions.has("MANAGE_MESSAGES")){
 
 
 Client.login("-");
-
