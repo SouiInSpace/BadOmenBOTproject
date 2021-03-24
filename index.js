@@ -221,11 +221,11 @@ if(message.memeber.permissions.has("MANAGE_MESSAGES")){
     }
 }
 //Commande de bannissement                              à vérifier :
-if(message.memeber.permissions.has("ADMINISTRATOR")){
-    if(message.content.startsWith(prefix + "ban")){
-            const user = message.mentions.first.user.first()
-            if(user){
-                const member = message.guild.member(user);
+//if(message.memeber.permissions.has("ADMINISTRATOR")){
+  //  if(message.content.startsWith(prefix + "ban")){
+    //        const user = message.mentions.first.user.first()
+      //      if(user){
+        /*        const member = message.guild.member(user);
                 if(member){
                     member.ban({
                         reason: 'Non respect tu règlement cheh',
@@ -242,7 +242,7 @@ if(message.memeber.permissions.has("ADMINISTRATOR")){
             
          } 
     }
-}
+}*/
 
 if(message.member.permissions.has("MANAGE_MESSAGES")){
     if(message.content.startsWith(prefix + "DELETOR")){
